@@ -2,6 +2,7 @@ from ping_pong import ping_pong
 from moving_line import moving_line
 from qr import QR
 from boiler import boiler
+from mix import mix
 
 from rich.console import Console
 from rich.panel import Panel
@@ -20,4 +21,6 @@ print("="*30)
 
 #QR(10)
 
-boiler(int(sys.argv[1]))
+#boiler(int(sys.argv[1]))
+
+mix(6, 20)
