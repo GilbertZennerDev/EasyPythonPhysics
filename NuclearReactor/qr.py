@@ -14,12 +14,12 @@ def QR(size):
     bin_value = bin(value)
     console.print("Bin Value of ", value, " = ", bin_value, value & 0b1000000)
 
-    arr = []
+    """arr = []
     for i in range(size):
         arr1 = []
         for j in range(size):
             arr1.append(random.randint(0,1))
-        arr.append(arr1)
+        arr.append(arr1)""
 
     for i in range(size):
         line = ""

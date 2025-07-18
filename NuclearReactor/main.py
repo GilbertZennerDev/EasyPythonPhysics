@@ -4,6 +4,7 @@ from qr import QR
 from boiler import boiler
 from mix import mix
 from arc import arc
+from cave_diving import cave_diving
 
 from rich.console import Console
 from rich.panel import Panel
@@ -26,4 +27,8 @@ print("="*30)
 
 #mix(6, 20)
 
-arc()
+#arc()
+
+QR(5)
+
+#cave_diving()
