@@ -6,26 +6,26 @@ from rich.table import Table
 import math
 import time
 import sys
+import readchar
+
+def print_bit_chain(usr_chr):
+    console = Console()
+    ord_usr_chr = ord(usr_chr)
+    upper_lim = int(math.log2(ord_usr_chr))
+    bit = 1
+    bit = bit << upper_lim;
+    while bit > 0:
+        if ord_usr_chr & bit:
+            console.print('[green]■[/green] ', end='')
+        else:
+            console.print('[blue]■[/blue] ', end='')
+        bit = bit >> 1;
+    console.print()
 
 def QR(size):
     console = Console()
-    console.clear()
-    value = 64
-    bin_value = bin(value)
-    console.print("Bin Value of ", value, " = ", bin_value, value & 0b1000000)
-
-    """arr = []
-    for i in range(size):
-        arr1 = []
-        for j in range(size):
-            arr1.append(random.randint(0,1))
-        arr.append(arr1)""
-
-    for i in range(size):
-        line = ""
-        for j in range(size):
-            if arr[i][j]:
-                line += '[green]■[/green] '
-            else:
-                line += '[blue]■[/blue] '
-        console.print(line)
+    usr_input = ""
+    while usr_input != ';':
+        #console.clear()
+        usr_input = readchar.readchar()
+        print_bit_chain(usr_input)
