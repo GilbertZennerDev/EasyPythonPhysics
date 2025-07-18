@@ -3,6 +3,7 @@ from moving_line import moving_line
 from qr import QR
 from boiler import boiler
 from mix import mix
+from arc import arc
 
 from rich.console import Console
 from rich.panel import Panel
@@ -23,4 +24,6 @@ print("="*30)
 
 #boiler(int(sys.argv[1]))
 
-mix(6, 20)
+#mix(6, 20)
+
+arc()
