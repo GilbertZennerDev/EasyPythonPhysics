@@ -17,9 +17,32 @@ import sys
 print("Build Your Own Nuclear Reactor! --- In Your garden")
 print("="*30)
 
-#ping_pong()
+if len(sys.argv) !=2 :
+    print("Usage:", sys.argv[0], "ping_pong/moving_line/QR/boiler/mix/arc/cave_diving")
+    exit()
 
-#moving_line()
+arg = sys.argv[1]
+
+if arg == "ping_pong":
+    ping_pong()
+
+if arg == "moving_line":
+    moving_line()
+
+if arg == "QR":
+    QR(5)
+
+if arg == "boiler":
+    boiler(12)
+
+if arg == "mix":
+    mix(6, 20)
+
+if arg == "arc":
+    arc()
+
+if arg == "cave_diving":
+    cave_diving()
 
 #QR(10)
 
@@ -29,6 +52,6 @@ print("="*30)
 
 #arc()
 
-QR(5)
+#QR(5)
 
 #cave_diving()
