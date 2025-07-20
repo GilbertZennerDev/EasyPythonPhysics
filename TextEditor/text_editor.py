@@ -1,52 +1,96 @@
 import tkinter as tk
-import subprocess as sp
+from tkinter import ttk, messagebox, filedialog
 from load_save_text import loadText, saveText
-from tkinter import ttk
 
-def handle_load():
-    filename = filenameEntry.get()
-    if filename:
-        content = loadText(filename)
-        writtenText.delete('1.0', 'end')
-        writtenText.insert('end', content)
+# ---- Helper Functions ----
+def handle_load(event=None):
+    filename = filename_var.get().strip()
+    if not filename:
+        messagebox.showwarning("Missing filename", "Please enter a filename to load.")
+        return
+    content = loadText(filename)
+    writtenText.delete('1.0', 'end')
+    writtenText.insert('end', content)
+    status_var.set(f"Loaded: {filename}")
 
-def handle_save():
-    filename = filenameEntry.get()
-    if filename:
-        content = writtenText.get('1.0', 'end-1c')
-        saveText(filename, content)
-        
-def handle_run():
-    handle_save()
-    filename = filenameEntry.get()
-    sp.run(["python3", filename])
+def handle_save(event=None):
+    filename = filename_var.get().strip()
+    if not filename:
+        messagebox.showwarning("Missing filename", "Please enter a filename to save.")
+        return
+    content = writtenText.get('1.0', 'end-1c')
+    saveText(filename, content)
+    status_var.set(f"Saved: {filename}")
 
+def ask_open_file():
+    path = filedialog.askopenfilename(defaultextension=".txt")
+    if path:
+        filename_var.set(path)
+        handle_load()
+
+def ask_save_file():
+    path = filedialog.asksaveasfilename(defaultextension=".txt")
+    if path:
+        filename_var.set(path)
+        handle_save()
+
+# ---- Main Window Setup ----
 root = tk.Tk()
-root.title("Text Editor")
-screen_width = root.winfo_screenwidth()
-screen_height = root.winfo_screenheight()
-root.geometry(f"{screen_width}x{screen_height}+0+0")
+root.title("Tkinter Text Editor")
+root.minsize(800, 600)
 
-filenameEntry = tk.Entry(root)
-filenameEntry.pack()
+# --- Style ---
+style = ttk.Style(root)
+style.theme_use('clam')  # Smoother look on all platforms
 
-# Make sure writtenText exists before defining the button commands!
-writtenText = tk.Text(root, height=50, width=100)
-writtenText.pack()
+# --- Filename and Toolbar ---
+toolbar = ttk.Frame(root, padding=(8,4), style='TFrame')
+toolbar.pack(side='top', fill='x')
 
-frame = ttk.Frame(root, padding=10)
-frame.pack(fill='x')
+filename_var = tk.StringVar()
+filename_entry = ttk.Entry(toolbar, textvariable=filename_var, width=50)
+filename_entry.pack(side='left', padx=(0,8))
 
-# Set up the buttons
-load_btn = ttk.Button(frame, text="Load", command=handle_load)
-save_btn = ttk.Button(frame, text="Save", command=handle_save)
-run_btn = ttk.Button(frame, text="Save and Run", command=handle_run)
+ttk.Button(
+    toolbar, text='Open...', command=ask_open_file
+).pack(side='left', padx=3)
+ttk.Button(
+    toolbar, text='Save As...', command=ask_save_file
+).pack(side='left', padx=3)
+ttk.Button(
+    toolbar, text='Load (Ctrl+O)', command=handle_load
+).pack(side='left', padx=3)
+ttk.Button(
+    toolbar, text='Save (Ctrl+S)', command=handle_save
+).pack(side='left', padx=3)
 
-load_btn.grid(row=0, column=0, padx=8, pady=8, sticky='nsew')
-save_btn.grid(row=0, column=1, padx=8, pady=8, sticky='nsew')
-run_btn.grid(row=0, column=2, padx=8, pady=8, sticky='nsew')
+filename_entry.insert(0, "Untitled.txt")
 
-frame.columnconfigure(0, weight=1)
-frame.columnconfigure(1, weight=1)
+# --- Text Editing Area ---
+mainframe = ttk.Frame(root, padding=(8,8))
+mainframe.pack(fill='both', expand=True)
 
+writtenText = tk.Text(
+    mainframe,
+    wrap='word',
+    font=('Consolas', 13),
+    undo=True,
+    borderwidth=1,
+    relief='flat'
+)
+writtenText.pack(fill='both', expand=True, side='left')
+yscroll = ttk.Scrollbar(mainframe, orient='vertical', command=writtenText.yview)
+yscroll.pack(side='right', fill='y')
+writtenText['yscrollcommand'] = yscroll.set
+
+# --- Status Bar ---
+status_var = tk.StringVar(value="Ready")
+status_bar = ttk.Label(root, textvariable=status_var, padding=6, anchor='w', background='#ececec')
+status_bar.pack(side='bottom', fill='x')
+
+# --- Keyboard Shortcuts ---
+root.bind('<Control-s>', handle_save)
+root.bind('<Control-o>', handle_load)
+
+# --- Run Application ---
 root.mainloop()
