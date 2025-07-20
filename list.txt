@@ -6,3 +6,6 @@ pip
 Pygments
 rich
 panda3d
+pymunk
+pygame
+numpy
