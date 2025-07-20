@@ -9,3 +9,4 @@ panda3d
 pymunk
 pygame
 numpy
+readchar

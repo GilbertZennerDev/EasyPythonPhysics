@@ -5,6 +5,7 @@ from boiler import boiler
 from mix import mix
 from arc import arc
 from cave_diving import cave_diving
+from rubbing_heat import rubbing_heat
 
 from rich.console import Console
 from rich.panel import Panel
@@ -43,6 +44,9 @@ if arg == "arc":
 
 if arg == "cave_diving":
     cave_diving()
+    
+if arg == "rubbing_heat":
+    rubbing_heat()
 
 #QR(10)
 
