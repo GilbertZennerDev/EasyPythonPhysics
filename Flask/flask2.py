@@ -5,7 +5,7 @@ app = Flask(__name__)
 # Basic route
 @app.route('/')
 def home():
-    return 'Home Page'
+    return 'Home Page try /about /user/username /post/post_id /submit'
 
 # Multiple routes for the same function
 @app.route('/about')
