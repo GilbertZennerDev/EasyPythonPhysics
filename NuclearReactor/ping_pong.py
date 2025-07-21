@@ -12,7 +12,7 @@ def ping_pong():
     console = Console()
     i = 0
     direction = -1
-    lim = int(sys.argv[1])
+    lim = 10
     ball_height = 5
     while 1:
         if i == lim or i == 0:
