@@ -45,7 +45,7 @@ if arg == "arc":
 if arg == "cave_diving":
     cave_diving()
     
-if arg == "rubbing_heat":
+if arg == "rubbingheat":
     rubbing_heat()
 
 #QR(10)

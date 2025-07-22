@@ -6,7 +6,7 @@
 #    By: gzenner <gzenner@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/16 16:50:39 by gzenner           #+#    #+#              #
-#    Updated: 2025/07/16 16:50:41 by gzenner          ###   ########.fr        #
+#    Updated: 2025/07/21 14:36:01 by gzenner          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,12 +20,14 @@ favorite_color = input("What's your favorite color? ")
 
 # Displaying personalized information
 print(f"Hello, {name}!")
-print(f"You are {age} years old.")
-print(f"Your favorite color is {favorite_color}.")
+print(f"You are {age} years ageold.")
+print("Your favorite color is", favorite_color, ".")
 
 # Simple calculations
-birth_year = 2025 - int(age)
-print(f"You were born in approximately {birth_year}.")
-
+try:
+    birth_year = 2025 - int(age)
+    print(f"You were born in approximately {birth_year}.")
+except Exception as e:
+    print(e)
 # Let's be creative
 print("🎉 Nice to meet you, " + name + "!")
