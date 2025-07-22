@@ -36,4 +36,4 @@ i = 0
 while i < 3:
     inputs.append(input("Enter sth:"))
     i += 1
-print(inputs)
+print(inputs)   
