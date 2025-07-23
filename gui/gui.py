@@ -7,7 +7,7 @@ def click_me():
 #Create the graphical user interface with one label and button
 root = tk.Tk()
 root.title("My first Python GUI")
-root.geometry("300x150")
+root.geometry("300x150")        
 
 #Create the label
 my_label = tk.Label(root, text="We love Python", font=("Arial", 16))

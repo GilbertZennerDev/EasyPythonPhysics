@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk, messagebox, filedialog
 from load_save_text import loadText, saveText
+from ournorm import *
 
 # ---- Helper Functions ----
 def handle_load(event=None):
@@ -21,6 +22,28 @@ def handle_save(event=None):
     content = writtenText.get('1.0', 'end-1c')
     saveText(filename, content)
     status_var.set(f"Saved: {filename}")
+
+def autocomplete(event=None):
+    content = open("./text/printtext.py", "r").read()
+    writtenText.insert('end', content)
+
+def checkNorm(event=None):
+    content = writtenText.get('1.0', 'end-1c').splitlines()
+    if check25lines(content):
+        print("25 Lines ok")
+    else:
+        print("Error: More than 25 Lines")
+    if checkEmptyLine(content):
+        print("No Empty Lines!")
+    else:
+        print("Error: Empty Lines!")
+    """fixedcontent = ""
+    for line in content:
+        fixedcontent += checkFunctionTab(line)
+    writtenText.delete('1.0', 'end')
+    writtenText.insert('end', fixedcontent)"""
+    status_var.set("Norme fixed")  
+    
 
 def ask_open_file():
     path = filedialog.askopenfilename(defaultextension=".txt")
@@ -63,8 +86,14 @@ ttk.Button(
 ttk.Button(
     toolbar, text='Save (Ctrl+S)', command=handle_save
 ).pack(side='left', padx=3)
+ttk.Button(
+    toolbar, text='Complete (Ctrl+A)', command=autocomplete
+).pack(side='left', padx=3)
+ttk.Button(
+    toolbar, text='Norme (Ctrl+R)', command=checkNorm
+).pack(side='left', padx=3)
 
-filename_entry.insert(0, "Untitled.txt")
+filename_entry.insert(0, "Untitled.py")
 
 # --- Text Editing Area ---
 mainframe = ttk.Frame(root, padding=(8,8))
@@ -91,6 +120,8 @@ status_bar.pack(side='bottom', fill='x')
 # --- Keyboard Shortcuts ---
 root.bind('<Control-s>', handle_save)
 root.bind('<Control-o>', handle_load)
+root.bind('<Control-a>', autocomplete)
+root.bind('<Control-r>', checkNorm)
 
 # --- Run Application ---
 root.mainloop()
