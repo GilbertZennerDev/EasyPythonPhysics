@@ -37,12 +37,23 @@ def checkNorm(event=None):
         print("No Empty Lines!")
     else:
         print("Error: Empty Lines!")
-    """fixedcontent = ""
+    fixWrittenText()
+
+def fixWrittenText(event=None):
+    content = writtenText.get('1.0', 'end-1c').splitlines()
+    
+    fixedcontent = ""
     for line in content:
         fixedcontent += checkFunctionTab(line)
     writtenText.delete('1.0', 'end')
-    writtenText.insert('end', fixedcontent)"""
-    status_var.set("Norme fixed")  
+    writtenText.insert('end', fixedcontent)
+
+    fixedcontent = ""
+    for line in content:
+        fixedcontent += checkTabIdent(line)
+    writtenText.delete('1.0', 'end')
+    writtenText.insert('end', fixedcontent)
+    status_var.set("Norme fixed")
     
 
 def ask_open_file():

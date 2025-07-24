@@ -1,15 +1,20 @@
 def checkFunctionTab(line):
+	if "(" not in line or ';' in line:
+		return (line + '\n')
 	original_line = line
 	line = line.split('\t')
-	#print(line)
 	if len(line) != 2:
 		line = line[0].split(' ')
-		#print(line)
-		line = line[0] + '\t' + line[1] + '\n'
-		#print(line)
-		return (line)
+		line = line[0] + '\t' + line[1]
+		return (line + '\n')
 	else:
-		return (original_line)
+		return (original_line  + '\n')
+
+def checkTabIdent(line):
+	if ';' not in line:
+		return (line + '\n')
+	line = '\t' + line.strip()
+	return (line + '\n')
 
 def check25lines(lines):
 	start = -1
