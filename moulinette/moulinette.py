@@ -3,6 +3,11 @@
 import unittest
 from calculator import calculator
 
+test = unittest.TestCase()
+calculator2 = calculator()
+sum = calculator2.addition(1, 1)
+test.assertEqual(sum, 2)
+
 class moulinette(unittest.TestCase):
 
     def setUp(self):
