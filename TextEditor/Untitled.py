@@ -1,4 +1,4 @@
-void	function1()
+void function1()
 {
 	return (0);
 }

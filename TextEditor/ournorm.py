@@ -2,11 +2,17 @@ def checkFunctionTab(line):
 	if "(" not in line or ';' in line:
 		return (line + '\n')
 	original_line = line
-	line = line.split('\t')
-	if len(line) != 2:
-		line = line[0].split(' ')
+	line = line.split()
+	print(line)
+	if line[1] and '(' in line[1]:
+		print("one")
 		line = line[0] + '\t' + line[1]
 		return (line + '\n')
+	#line = line.split('\t')
+	#if ' ' in line:#len(line) != 2:
+#		line = line[0].split(' ')
+#		line = line[0] + '\t' + line[1]#
+#		return (line + '\n')
 	else:
 		return (original_line  + '\n')
 
