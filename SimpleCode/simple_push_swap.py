@@ -31,7 +31,7 @@ def checkAscending(arr):
             return False"""
     for i, nb in enumerate(arr):
         if i < len(arr) - 1:
-            if nb > int(arr[i + 1]):
+            if int(nb) > int(arr[i + 1]):
                 return False
     return True
 
@@ -42,7 +42,7 @@ def DoPushSwap():
     if not checkDouble(a):
         print("Error: Duplicates")
         exit()
-    #print("Start a:",a)
+    print("Start a:",a)
     timestamp = time.time()
     while len(a) > 0:
         i, minimum = getMin(a)
@@ -50,11 +50,11 @@ def DoPushSwap():
         b.insert(0, minimum)
         a.pop(i)
     #print(a)
-    #print(b)
+    print("mid b:",b)
     while len(b) > 0:
         a.insert(0, b[0])
         b.pop(0)
-    #print("Final: ",a)
+    print("Final: ",a)
     #print(b)
     print("Time Passed: ", time.time() - timestamp)
     #a.insert(0, 1000)
