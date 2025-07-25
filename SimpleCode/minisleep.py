@@ -34,7 +34,34 @@ from sklearn.linear_model import LinearRegression
 reg = LinearRegression().fit([[0], [1], [4]], [0, 1, 2])
 print(reg.predict([[3]]))  # Output: [3.]
 """
-
+"""
 import torch
 x = torch.tensor([1.0, 2.0, 3.0])
 print(x * 2)  # Output: tensor([2., 4., 6.])
+"""
+import random
+arr = []
+sum = 0
+
+def initarr(limit):
+    arr = []
+    for i in range(100):
+        arr.append(random.randint(-1000, 1000))
+    return arr
+def average(arr):
+    sum = 0
+    for i in range(len(arr)):
+        sum += arr[i]
+    return sum / len(arr)
+def ecarttype(average, arr):
+    sum = 0
+    for i in range(len(arr)):
+        sum += (arr[i] - average)**2
+    variance = (sum / len(arr))
+    et = variance ** .5
+    return variance, et
+
+arr = initarr(100)
+average = average(arr)
+variance, et = ecarttype(average, arr)
+print(variance, et)
